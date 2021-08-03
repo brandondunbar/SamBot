@@ -1,9 +1,6 @@
-"""main.py
-
-Main python file for SamBot API endpoint(s), yet to be integrated.
-
-Brandon Dunbar
-brandon.dunbar97@gmail.com
+"""server.py
+Allows network control of SamBot via REST API.
+Brandon Dunbar  Brandon.Dunbar97@gmail.com
 """
 
 from flask import Flask
@@ -70,3 +67,4 @@ api.add_resource(PublicInterface, '/')
 
 if __name__ == '__main__':
     app.run(debug=True)
+
