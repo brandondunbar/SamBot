@@ -1,5 +1,5 @@
-# SamBot API
-This simple Flask REST API allows basic interfacing with SamBot.
+# SamBot
+The logic driving the robot.
 
 ## Obtaining an API Token
 API tokens are currently unavailable.
