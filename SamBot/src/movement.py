@@ -51,4 +51,13 @@ class Movement:
             if direction == 0:
                 self._setPin(self.pinLeftFwd, True)
                 self._setPin(self.pinRightFwd, True)
+            elif direction == 180:
+                self._setPin(self.pinLeftBkwd, True)
+                self._setPin(self.pinRightBkwd, True)
+            elif direction == 90:
+                self._setPin(self.pinLeftBkwd, True)
+                self._setPin(self.pinRightFwd, True)
+            elif direction == 270:
+                self._setPin(self.pinLeftFwd, True)
+                self._setPin(self.pinRightBkwd, True)
 
