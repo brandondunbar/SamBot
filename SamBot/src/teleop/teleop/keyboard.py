@@ -16,6 +16,8 @@ KEY_BKWD = 's'
 
 
 class Keyboard(Node):
+    """Translates keyboard input to movement instructions, which are sent to
+    the movement service."""
 
     def __init__(self):
         super().__init__('keyboard')
@@ -26,6 +28,7 @@ class Keyboard(Node):
         self.lastMoveCommand = (-1, -1)
 
     def listen(self):
+        """Listens for keystrokes"""
         try:
             direction = -1
             if keyboard.is_pressed(KEY_FWD):
@@ -50,6 +53,7 @@ class Keyboard(Node):
             raise(KeyboardInterrupt)
 
     def send_request(self, direction, speed):
+        """Sends the movement request to the movement service."""
         self.req.a = direction
         self.req.b = speed
         self.future = self.cli.call_async(self.req)
@@ -77,8 +81,7 @@ def main(args=None):
                         'Service call failed %r' % (e, ))
             else:
                 keyboard.get_logger().info(
-                        f"\nTold move\n\tdir: {keyboard.req.a}\n\tspeed: {keyboard.req.b}"\
-                                f"\nReceived: {response.sum}"
+                        f"\nExited with response from movement service: {response.sum}"
                 )
             break
 

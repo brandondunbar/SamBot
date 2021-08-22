@@ -10,11 +10,11 @@ class MoveService(Node):
 
     def __init__(self, **kwargs):
         super().__init__('minimal_service')
-        self._assignPins(config=kwargs)
-        self._gpioSetup()
+        self._assign_pins(config=kwargs)
+        self._gpio_setup()
         self.srv = self.create_service(AddTwoInts, 'move', self.move)
 
-    def _assignPins(self, **kwargs):
+    def _assign_pins(self, **kwargs):
         """Assigns provided pin numbers to corresponding attribute.
         :param: pinLeftFwd - The pin that causes the left motor to move forward
         :param: pinLeftBkwd - The pin that causes the left motor to move backward
@@ -32,7 +32,7 @@ class MoveService(Node):
         self.pinRightFwd = pinConfig["pinRightFwd"]
         self.pinRightBkwd = pinConfig["pinRightBkwd"]
 
-    def _gpioSetup(self):
+    def _gpio_setup(self):
         """Prepares the relevant GPIO pins.
         """
         GPIO.setmode(GPIO.BCM)
@@ -42,7 +42,7 @@ class MoveService(Node):
         GPIO.setup(self.pinRightBkwd, GPIO.OUT, initial=GPIO.LOW)
 
 
-    def _setPin(self, pin, setToHigh):
+    def _set_pin(self, pin, setToHigh):
         """Sets the given pin to high or low.
         :param: pin - The pin to set.
         :param: setToHigh - Boolean, whether to set it to high or not.
@@ -58,23 +58,23 @@ class MoveService(Node):
         direction = request.a
         speed = request.b
         if speed == 0:
-            self._setPin(self.pinLeftFwd, False)
-            self._setPin(self.pinLeftBkwd, False)
-            self._setPin(self.pinRightFwd, False)
-            self._setPin(self.pinRightBkwd, False)
+            self._set_pin(self.pinLeftFwd, False)
+            self._set_pin(self.pinLeftBkwd, False)
+            self._set_pin(self.pinRightFwd, False)
+            self._set_pin(self.pinRightBkwd, False)
         else:
             if direction == 0:
-                self._setPin(self.pinLeftFwd, True)
-                self._setPin(self.pinRightFwd, True)
+                self._set_pin(self.pinLeftFwd, True)
+                self._set_pin(self.pinRightFwd, True)
             elif direction == 180:
-                self._setPin(self.pinLeftBkwd, True)
-                self._setPin(self.pinRightBkwd, True)
+                self._set_pin(self.pinLeftBkwd, True)
+                self._set_pin(self.pinRightBkwd, True)
             elif direction == 90:
-                self._setPin(self.pinLeftBkwd, True)
-                self._setPin(self.pinRightFwd, True)
+                self._set_pin(self.pinLeftBkwd, True)
+                self._set_pin(self.pinRightFwd, True)
             elif direction == 270:
-                self._setPin(self.pinLeftFwd, True)
-                self._setPin(self.pinRightBkwd, True)
+                self._set_pin(self.pinLeftFwd, True)
+                self._set_pin(self.pinRightBkwd, True)
         
         self.get_logger().info(f"Moved in direction {direction} at {speed} speed.")
         response.sum = 0
